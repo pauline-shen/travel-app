@@ -1,9 +1,9 @@
-const { pool } = require("../db/connect");
+const { db } = require("../db/connect");
 const {queryAllUsers} = require("../models/UserModel")
 
 const getAllUsers = async (req, res) => {
   // const queryString = `SELECT * FROM users;`;
-  // pool.query(queryString).then((resp) => {
+  // db.query(queryString).then((resp) => {
   //   console.log("response is ", resp.rows);
   //   return resp.rows;
   // });

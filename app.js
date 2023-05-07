@@ -1,26 +1,32 @@
 require("dotenv").config()
 const express = require("express")
 const app = express()
+const morgan = require('morgan');
+const PORT = process.env.PORT || 8080;
+const cors = require("cors");
+const { connectDB, db } = require("./db/connect")
 
-const {connectDB, pool} = require("./db/connect")
+app.use(morgan('dev'));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
+app.use(express.json());
 
-// routes 
-const userRouter = require("./routes/users")
-
-app.use(express.json())
-
-
-
+// sample
 app.get("/", (req, res) => {
   res.send("Hello world")
 })
 
-app.use("/api/v1/users", userRouter)  
+// routes
+const userRouter = require("./routes/users")
+
+
+// mount routes
+app.use("/api/v1/users", userRouter)
 
 const startApp = async () => {
   try {
     await connectDB()
-    app.listen(process.env.PORT, console.log(`App started on PORT ${process.env.PORT}`))
+    app.listen(PORT, console.log(`App started on PORT ${PORT}`))
   } catch (err) {
     console.log("an error occured", err)
   }
@@ -34,5 +40,5 @@ startApp()
 //controller to model
 //model talks to db
 //db returns value to model
-//model talks to controller 
+//model talks to controller
 //controller performs the logic

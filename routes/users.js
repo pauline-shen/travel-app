@@ -3,13 +3,15 @@ const router = express.Router()
 
 const {getAllUsers} = require("../controllers/UserController")
 
-// const {pool} = require
 
-// const userRouter = (pool) => {
+// service layer (business logic)
+// const {db} = require
+
+// const userRouter = (db) => {
 
 //   router.route("/", (req, res) => {
 //     const queryString = `SELECT * FROM users;`
-//     pool.query(queryString)
+//     db.query(queryString)
 //     .then(res => res.rows[0]);
 //   })
 // }
