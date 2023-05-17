@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router()
 
-const {getAllUsers} = require("../controllers/UserController")
+const { getAllUsers } = require("../controllers/UserController")
 
 
 // service layer (business logic)
