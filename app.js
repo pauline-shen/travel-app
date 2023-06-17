@@ -5,7 +5,6 @@ const app = express()
 const morgan = require("morgan");
 const PORT = process.env.PORT || 8080;
 const cors = require("cors");
-const { connectDB, db } = require("./db/connect")
 
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: true }));
@@ -14,22 +13,22 @@ app.use(express.json());
 
 // sample
 app.get("/", (req, res) => {
-  res.send("Hello world")
+  res.send("Hello world");
 })
 
 // routes
-const userRouter = require("./routes/users")
+const userRouter = require("./routes/users");
 
 
 // mount routes
-app.use("/api/v1/users", userRouter)
+app.use(cors());
+app.use("/api/users", userRouter);
 
 const startApp = async () => {
   try {
-    await connectDB()
-    app.listen(PORT, console.log(`App started on PORT ${PORT}`))
+    app.listen(PORT, console.log(`App started on PORT ${PORT}`));
   } catch (err) {
-    console.log("an error occured", err)
+    console.log("an error occured", err);
   }
 }
 
